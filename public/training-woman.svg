@@ -1,0 +1,43 @@
+<svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="600" fill="none"/>
+  
+  <!-- Head -->
+  <circle cx="200" cy="80" r="30" fill="#e8c5d1"/>
+  
+  <!-- Hair -->
+  <path d="M 170 70 Q 170 50 200 45 Q 230 50 230 70" fill="#2d2d2d" stroke="#2d2d2d" stroke-width="2"/>
+  
+  <!-- Body -->
+  <rect x="180" y="115" width="40" height="80" fill="#f472b6" rx="5"/>
+  
+  <!-- Left Arm (extended up for overhead press) -->
+  <g>
+    <line x1="180" y1="125" x2="120" y2="60" stroke="#e8c5d1" stroke-width="12" stroke-linecap="round"/>
+    <!-- Dumbbell in left hand -->
+    <circle cx="110" cy="50" r="8" fill="#d97706"/>
+    <rect x="105" y="48" width="10" height="4" fill="#92400e"/>
+  </g>
+  
+  <!-- Right Arm (extended up for overhead press) -->
+  <g>
+    <line x1="220" y1="125" x2="280" y2="60" stroke="#e8c5d1" stroke-width="12" stroke-linecap="round"/>
+    <!-- Dumbbell in right hand -->
+    <circle cx="290" cy="50" r="8" fill="#d97706"/>
+    <rect x="285" y="48" width="10" height="4" fill="#92400e"/>
+  </g>
+  
+  <!-- Left Leg -->
+  <line x1="190" y1="195" x2="180" y2="320" stroke="#1f2937" stroke-width="11" stroke-linecap="round"/>
+  
+  <!-- Right Leg -->
+  <line x1="210" y1="195" x2="220" y2="320" stroke="#1f2937" stroke-width="11" stroke-linecap="round"/>
+  
+  <!-- Shoes -->
+  <ellipse cx="180" cy="330" rx="12" ry="8" fill="#7c3aed"/>
+  <ellipse cx="220" cy="330" rx="12" ry="8" fill="#7c3aed"/>
+  
+  <!-- Flex indicator lines -->
+  <path d="M 150 100 Q 140 110 145 125" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M 250 100 Q 260 110 255 125" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>
