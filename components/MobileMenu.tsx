@@ -10,10 +10,10 @@ export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Trainings", href: "#trainings" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contacts", href: "#contacts" },
+    { name: "About", href: "/about" },
+    { name: "Trainings", href: "/#trainings" },
+    { name: "Testimonials", href: "/#testimonials" },
+    { name: "Contacts", href: "/#contacts" },
   ];
 
   const [mounted, setMounted] = useState(false);
@@ -93,13 +93,13 @@ export default function MobileMenu() {
                   <div className="flex h-16 w-16 items-center justify-center rounded-lg">
                     <Image
                       src="/hero-arm.svg"
-                      alt="letHerBloom Logo"
+                      alt="LetHerBloom Logo"
                       width={200}
                       height={200}
                       className="h-auto w-auto"
                     />
                   </div>
-                  <span className="mt-2 text-xl font-bold text-rose-700">letHerBloom</span>
+                  <span className="mt-2 text-xl font-bold text-rose-700">LetHerBloom</span>
                 </div>
 
                 {/* Center: Navigation Items */}

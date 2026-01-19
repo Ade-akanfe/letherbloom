@@ -7,7 +7,7 @@
 - Logo appears in:
   - [Navigation.tsx](components/Navigation.tsx) - Header with logo + brand name
   - [Footer.tsx](components/Footer.tsx) - Footer branding
-  - Both locations show the logo with the letHerBloom text
+  - Both locations show the logo with the LetHerBloom text
 
 ### 2. **Hero Section Update**
 - [HeroSection.tsx](components/HeroSection.tsx) now uses `/training-woman.svg`

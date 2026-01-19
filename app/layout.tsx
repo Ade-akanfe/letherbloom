@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "letHerBloom - Women's Upper Body Strength Training",
+  title: "LetHerBloom - Women's Upper Body Strength Training",
   description: "Empowering women through focused upper-body strength, mobility, and confidence-building workouts. Join our community designed for women at every fitness level.",
   icons: {
     icon: "/hero-arm.svg",

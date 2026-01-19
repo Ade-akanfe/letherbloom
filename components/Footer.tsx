@@ -46,13 +46,13 @@ export default function Footer() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg ">
                   <Image
                     src="/hero-arm.svg"
-                    alt="letHerBloom Logo"
+                    alt="LetHerBloom Logo"
                     width={40}
                     height={40}
                     className="h-8 w-8"
                   />
                 </div>
-                <span className="text-2xl font-bold text-rose-500">letHerBloom</span>
+                <span className="text-2xl font-bold text-rose-500">LetHerBloom</span>
               </Link>
               <p className="mt-4 text-zinc-400">
                 Empowering women through strength, mobility, and confidence-building workouts.
@@ -174,7 +174,7 @@ export default function Footer() {
         {/* Bottom Footer */}
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <p className="text-sm text-zinc-400">
-            © {currentYear} letHerBloom. All rights reserved.
+            © {currentYear} LetHerBloom. All rights reserved.
           </p>
 
           <div className="flex gap-6">

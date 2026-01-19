@@ -43,7 +43,7 @@ export default function TestimonialsSection() {
       name: "Sarah Johnson",
       role: "Fitness Enthusiast",
       content:
-        "letHerBloom completely transformed how I approach strength training. The form guides and supportive community made all the difference in my fitness journey.",
+        "LetHerBloom completely transformed how I approach strength training. The form guides and supportive community made all the difference in my fitness journey.",
       avatar: "👩‍🦰",
     },
     {

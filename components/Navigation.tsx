@@ -16,20 +16,20 @@ export default function Navigation() {
             <div className="flex h-12 w-12 items-center justify-center rounded-lg">
               <Image
                 src="/hero-arm.svg"
-                alt="letHerBloom Logo"
+                alt="LetHerBloom Logo"
                 width={200}
                 height={200}
                 className="h-25 w-20"
               />
             </div>
-            <span className="text-xl font-bold text-rose-700">letHerBloom</span>
+            <span className="text-xl font-bold text-rose-700">LetHerBloom</span>
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "About" ? "/about" : `/#${item.toLowerCase()}`}
                 className="group"
               >
                 <span className="text-sm font-medium text-zinc-700 transition hover:text-rose-600 block group-hover:scale-105">

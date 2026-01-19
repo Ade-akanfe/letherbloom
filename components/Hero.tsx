@@ -24,7 +24,7 @@ export default function Hero() {
         >
           <div className="flex flex-col justify-center gap-6">
             <h1 className="text-4xl font-extrabold leading-tight text-rose-700">
-              letHerBloom
+              LetHerBloom
             </h1>
             <p className="max-w-lg text-lg text-zinc-700">
               Empowering women through focused upper-body strength, mobility,
