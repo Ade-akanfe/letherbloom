@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonials" className="bg-linear-to-b from-rose-50 to-white py-12">
+    <section id="testimonials" className="bg-gradient-to-b from-rose-50 to-white py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

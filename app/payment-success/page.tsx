@@ -26,7 +26,7 @@ function PaymentSuccessContent() {
 
     const fetchCode = async () => {
       try {
-        const res = await fetch(`/api/get-code?session_id=${sessionId}`);
+        const res = await fetch(`/api/get-code?session_id=${sessionId}`, { cache: "no-store" });
         const data = await res.json();
 
         if (data.code) {
@@ -65,11 +65,10 @@ function PaymentSuccessContent() {
         <div className="w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl border border-zinc-100 animate-in fade-in zoom-in duration-500">
           {/* Header Section */}
           <div
-            className={`px-8 py-10 text-center text-white ${
-              fetchedCode
-                ? "bg-linear-to-r from-green-500 to-emerald-600"
-                : "bg-linear-to-r from-rose-400 to-rose-500"
-            }`}
+            className={`px-8 py-10 text-center text-white ${fetchedCode
+              ? "bg-gradient-to-r from-green-500 to-emerald-600"
+              : "bg-gradient-to-r from-rose-400 to-rose-500"
+              }`}
           >
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
               {fetchedCode ? (
@@ -94,9 +93,8 @@ function PaymentSuccessContent() {
               {fetchedCode ? "Payment Successful!" : "Finalizing Order..."}
             </h1>
             <p
-              className={`mt-2 opacity-90 ${
-                fetchedCode ? "text-green-50" : "text-zinc-300"
-              }`}
+              className={`mt-2 opacity-90 ${fetchedCode ? "text-green-50" : "text-zinc-300"
+                }`}
             >
               {fetchedCode
                 ? "You're all set to join the live session."
@@ -137,7 +135,7 @@ function PaymentSuccessContent() {
                   Your Access Code
                 </p>
                 <div className="relative group w-full mb-8">
-                  <div className="absolute -inset-1 bg-linear-to-r from-green-500 to-emerald-600 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
                   <div className="relative w-full bg-zinc-50 border border-zinc-200 rounded-xl p-6 text-center">
                     <p className="text-4xl font-mono font-bold text-zinc-900 tracking-widest break-all select-all">
                       {fetchedCode}

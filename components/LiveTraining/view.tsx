@@ -138,6 +138,7 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import CodeEntry from "@/components/LiveTraining/CodeEntry";
 import ZoomSession from "@/components/LiveTraining/ZoomSession";
+import { formatLocalTime, getRelativeTime } from "@/util/date-format";
 
 type Meeting = {
   id: string;
@@ -262,9 +263,11 @@ function LiveTrainingContent() {
                         <h3 className="font-semibold text-zinc-900">
                           {meeting.title || "Live Training Session"}
                         </h3>
-                        <p className="text-sm text-zinc-500">
-                          Start:{" "}
-                          {new Date(meeting.start_time).toLocaleString()}
+                        <p className="text-rose-600 font-bold text-sm">
+                          {formatLocalTime(meeting.start_time)}
+                        </p>
+                        <p className="text-zinc-400 text-xs">
+                          {getRelativeTime(meeting.start_time)}
                         </p>
                       </div>
 

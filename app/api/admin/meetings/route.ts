@@ -35,3 +35,64 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: err.message || "Unknown" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "Missing meeting ID" }, { status: 400 });
+    }
+
+    const { error } = await supabase.from("meetings").delete().eq("id", id);
+
+    if (error) {
+      console.error("Delete meeting error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.error("Admin delete meeting error:", err);
+    return NextResponse.json({ error: err.message || "Unknown" }, { status: 500 });
+  }
+}
+
+export async function PATCH(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    const body = await req.json();
+
+    if (!id) {
+      return NextResponse.json({ error: "Missing meeting ID" }, { status: 400 });
+    }
+
+    // Allow updating specific fields
+    const allowedFields: any = {};
+    if (body.title !== undefined) allowedFields.title = body.title;
+    if (body.meeting_number !== undefined) allowedFields.meeting_number = body.meeting_number;
+    if (body.meeting_password !== undefined) allowedFields.meeting_password = body.meeting_password;
+    if (body.start_time !== undefined) allowedFields.start_time = body.start_time ? new Date(body.start_time).toISOString() : null;
+    if (body.details !== undefined) allowedFields.details = body.details ? { description: String(body.details) } : null;
+    if (body.is_ended !== undefined) allowedFields.is_ended = body.is_ended;
+
+    const { data, error } = await supabase
+      .from("meetings")
+      .update(allowedFields)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Update meeting error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ meeting: data });
+  } catch (err: any) {
+    console.error("Admin update meeting error:", err);
+    return NextResponse.json({ error: err.message || "Unknown" }, { status: 500 });
+  }
+}

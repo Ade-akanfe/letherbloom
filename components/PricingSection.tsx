@@ -1,73 +1,20 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-
-interface PricingTierProps {
-  name: string;
-  price: string;
-  features: string[];
-  isSelected: boolean;
-  onSelect: () => void;
-}
-
-function PricingTier({
-  name,
-  price,
-  features,
-  isSelected,
-  onSelect,
-}: PricingTierProps) {
-  return (
-    <motion.div
-      whileHover={{ y: -8 }}
-    >
-      <div
-        onClick={onSelect}
-        className={`rounded-2xl p-8 transition cursor-pointer ${isSelected
-          ? "scale-105 border-2 border-rose-600 bg-gradient-to-br from-rose-50 to-white shadow-2xl"
-          : "border border-zinc-200 bg-white shadow-lg"
-          }`}>
-        <h3 className={`text-2xl font-bold ${isSelected ? "text-rose-600" : "text-zinc-900"}`}>
-          {name}
-        </h3>
-        <div className="mt-4">
-          <span className="text-4xl font-black text-zinc-900">${price}</span>
-          <span className="text-zinc-600">/month</span>
-        </div>
-
-        <ul className="mt-8 space-y-4">
-          {features.map((feature) => (
-            <li key={feature} className="flex items-center gap-3">
-              <span className="text-rose-600">✓</span>
-              <span className="text-zinc-700">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <button className={`mt-8 w-full rounded-full py-3 px-4 font-semibold transition ${isSelected
-            ? "bg-rose-600 text-white shadow-lg"
-            : "border border-rose-600 text-rose-600 hover:bg-rose-50"
-            }`}>
-            Choose {name}
-          </button>
-        </motion.button>
-      </div>
-    </motion.div>
-  );
-}
+import PlanCard from "./PlanCard";
 
 export default function PricingSection() {
-  const [selectedPlan, setSelectedPlan] = useState("Premium");
+  const [selectedPlan, setSelectedPlan] = useState("Elite");
+  const [eliteDuration, setEliteDuration] = useState(3); // months
+
+  const eliteMonthlyPrice = 59;
+  const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const tiers = [
     {
       name: "Basic",
       price: "29",
+      priceNote: "month",
+      description: "Perfect for getting started on your journey.",
       features: [
         "Weekly workout plans",
         "Form guides & videos",
@@ -76,8 +23,10 @@ export default function PricingSection() {
       ],
     },
     {
-      name: "Premium",
-      price: "59",
+      name: "Elite",
+      price: eliteTotalPrice.toString(),
+      priceNote: `for ${eliteDuration} months`,
+      description: "Maximum accountability and personalization.",
       features: [
         "Custom workout plans",
         "Progress tracking & analytics",
@@ -85,17 +34,20 @@ export default function PricingSection() {
         "Priority support",
         "Monthly form check-ins",
       ],
+      hasSelector: true,
     },
     {
-      name: "Elite",
-      price: "99",
+      name: "Organization",
+      price: "10",
+      priceNote: "per user/month",
+      description: "Perfect for teams, gyms, and corporate wellness.",
       features: [
-        "1:1 coaching sessions",
-        "Personalized nutrition guidance",
-        "VIP community access",
-        "Direct coach messaging",
-        "Quarterly form assessments",
+        "Flexible duration",
+        "Admin dashboard",
+        "Add/remove members",
+        "Bulk pricing",
       ],
+      isOrganization: true,
     },
   ];
 
@@ -115,23 +67,42 @@ export default function PricingSection() {
             <h2 className="mt-2 text-4xl font-bold text-zinc-900">
               Choose Your Plan
             </h2>
-            <p className="mt-4 text-zinc-600">Cancel anytime · 7-day free trial</p>
+            <p className="mt-4 text-zinc-600">Cancel anytime</p>
           </div>
         </motion.div>
 
         <div className="flex justify-center">
-          <div className="grid gap-6 md:grid-cols-3 w-full max-w-5xl">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
             {tiers.map((tier, index) => (
               <motion.div
                 key={tier.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="h-full"
               >
-                <PricingTier
+                {/* @ts-ignore - PlanCard has some optional props mismatch with tiers object */}
+                <PlanCard
                   {...tier}
-                  isSelected={selectedPlan === tier.name}
-                  onSelect={() => setSelectedPlan(tier.name)}
+                  featured={selectedPlan === tier.name}
+                  eliteDuration={tier.name === "Elite" ? eliteDuration : undefined}
+                  onDurationChange={tier.name === "Elite" ? setEliteDuration : undefined}
+                // We don't pass onSelect if we want it to trigger checkout directly unless it's for selection highlighting only?
+                // PlanCard logic: if onSelect is present, it calls onSelect. If NOT present, it calls handleSubscribe (checkout).
+                // But we want to highlight it when clicked too?
+                // Actually, PlanCard doesn't have a "selection only" mode that ALSO keeps checkout button?
+                // Let's modify PlanCard a bit or just use it for checkout.
+                // If we want "click to select" AND "click button to checkout", PlanCard supports that via button.
+                // But PlanCard top-level div has onSelect.
+                // If we pass onSelect, it disables checkout on div click.
+                // Maybe we want to update selectedPlan when clicked, but let the button trigger checkout?
+                // For now, let's just make clicking it trigger checkout, as user requested "go to site to pay".
+                // So we will NOT pass onSelect used for wizard.
+                // We can pass `featured` to highlight it if we match it.
+                // But how to update `selectedPlan`?
+                // Maybe we don't need `selectedPlan` state here if clicking goes to checkout?
+                // Or we use onMouseEnter to set selected?
+                // Let's simpler: clicking anywhere triggers checkout.
                 />
               </motion.div>
             ))}
@@ -141,3 +112,4 @@ export default function PricingSection() {
     </section>
   );
 }
+

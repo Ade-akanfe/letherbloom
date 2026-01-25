@@ -28,13 +28,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Code expired" }, { status: 401 });
     }
 
-    // Return all meetings starting in the future or recent past (e.g. last 24h to be safe/current)
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-
     const { data, error } = await supabase
       .from("meetings")
       .select("*")
-      .gte("start_time", oneDayAgo)
+      .eq("is_ended", false)
       .order("start_time", { ascending: true });
 
     if (error) {

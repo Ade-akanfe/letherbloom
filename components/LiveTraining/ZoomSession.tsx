@@ -164,7 +164,7 @@ export default function ZoomSession({
     // View: Join Method Selection (Desktop only)
     if (joinMethod === 'selection' && !isMobile) {
         return (
-            <div className="flex bg-linear-to-br from-zinc-900 to-zinc-800 text-white p-8 rounded-xl items-center justify-center min-h-[600px]">
+            <div className="flex bg-gradient-to-br from-zinc-900 to-zinc-800 text-white p-8 rounded-xl items-center justify-center min-h-[600px]">
                 <div className="text-center max-w-md w-full">
                     <h2 className="text-2xl font-bold mb-6">Choose how to join</h2>
 
@@ -206,7 +206,7 @@ export default function ZoomSession({
     // View: Open in App (Mobile or Desktop Selection)
     if (joinMethod === 'app') {
         return (
-            <div className="flex bg-linear-to-br from-zinc-900 to-zinc-800 text-white p-8 rounded-xl items-center justify-center min-h-[600px]">
+            <div className="flex bg-gradient-to-br from-zinc-900 to-zinc-800 text-white p-8 rounded-xl items-center justify-center min-h-[600px]">
                 <div className="text-center max-w-md">
                     <div className="mb-6">
                         <svg className="w-20 h-20 mx-auto mb-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">

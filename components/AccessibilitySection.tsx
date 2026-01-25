@@ -55,7 +55,7 @@ export default function AccessibilitySection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="rounded-2xl bg-linear-to-br from-rose-100 to-rose-50 p-12 text-center flex flex-col items-center justify-center">
+            <div className="rounded-2xl bg-gradient-to-br from-rose-100 to-rose-50 p-12 text-center flex flex-col items-center justify-center">
               <Image
                 src="/training-woman.svg"
                 alt="Woman doing upper body training"
