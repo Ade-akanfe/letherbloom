@@ -65,7 +65,7 @@ export async function POST(req: Request) {
   const payload = {
     appKey: clientId,
     mn: Number(meetingNumber),
-    role: 1,
+    role: Number(role),
     iat,
     exp,
     tokenExp: exp,
@@ -83,6 +83,6 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     signature: `${base64Header}.${base64Payload}.${signature}`,
-    clientId,
+    sdkKey: clientId,
   });
 }

@@ -51,12 +51,12 @@ export function getRelativeTime(dateStr: string) {
         return "Started in the past";
     }
 
-    const diffMins = Math.floor(diffMs / 60000);
+    const diffMins = Math.ceil(diffMs / 60000);
     if (diffMins < 60) return `Starting in ${diffMins}m`;
 
-    const diffHours = Math.floor(diffMins / 60);
+    const diffHours = Math.ceil(diffMs / (60000 * 60));
     if (diffHours < 24) return `Starting in ${diffHours}h`;
 
-    const diffDays = Math.floor(diffHours / 24);
+    const diffDays = Math.ceil(diffMs / (60000 * 60 * 24));
     return `Starting in ${diffDays}d`;
 }

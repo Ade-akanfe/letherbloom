@@ -130,7 +130,7 @@ export async function POST(request: Request) {
         const { error: codeError } = await supabase.from("access_codes").insert({
             code: orgCode,
             is_active: true,
-            plan: "Organization",
+            plan: "Corporate Group",
             expires_at: subscriptionEnd.toISOString(),
             assigned_to: organizationName,
             is_organization: true,

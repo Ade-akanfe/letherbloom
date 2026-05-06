@@ -165,6 +165,12 @@ function LiveTrainingContent() {
   const [selectedMeeting, setSelectedMeeting] = useState<Meeting | null>(null);
   const [userName, setUserName] = useState("");
   const [showNameInput, setShowNameInput] = useState(false);
+  const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 10000);
+    return () => clearInterval(timer);
+  }, []);
 
   const urlCode = searchParams.get("code");
 
@@ -201,6 +207,14 @@ function LiveTrainingContent() {
   }, []);
 
   const handleJoinMeeting = useCallback((meeting: Meeting) => {
+    // Mobile devices open the native Zoom App or Zoom's smart redirect page
+    if (window.innerWidth <= 768) {
+      const zoomUrl = `https://zoom.us/j/${meeting.meeting_number}?pwd=${meeting.meeting_password || ""}`;
+      window.open(zoomUrl, "_blank");
+      return;
+    }
+
+    // Tablets and Desktop use the embedded view
     setSelectedMeeting(meeting);
     setShowNameInput(true);
   }, []);
@@ -254,31 +268,38 @@ function LiveTrainingContent() {
                 </div>
               ) : (
                 <div className="grid gap-4">
-                  {meetings.map((meeting) => (
-                    <div
-                      key={meeting.id}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-zinc-100 bg-zinc-50 p-4 transition hover:bg-zinc-100"
-                    >
-                      <div className="space-y-1">
-                        <h3 className="font-semibold text-zinc-900">
-                          {meeting.title || "Live Training Session"}
-                        </h3>
-                        <p className="text-rose-600 font-bold text-sm">
-                          {formatLocalTime(meeting.start_time)}
-                        </p>
-                        <p className="text-zinc-400 text-xs">
-                          {getRelativeTime(meeting.start_time)}
-                        </p>
-                      </div>
-
-                      <button
-                        onClick={() => handleJoinMeeting(meeting)}
-                        className="rounded-lg bg-black px-6 py-2.5 font-semibold text-white transition hover:bg-zinc-800 active:scale-95"
+                  {meetings.map((meeting) => {
+                    const isStarted = new Date(meeting.start_time) <= now;
+                    return (
+                      <div
+                        key={meeting.id}
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-zinc-100 bg-zinc-50 p-4 transition hover:bg-zinc-100"
                       >
-                        Join Session
-                      </button>
-                    </div>
-                  ))}
+                        <div className="space-y-1">
+                          <h3 className="font-semibold text-zinc-900">
+                            {meeting.title || "Live Training Session"}
+                          </h3>
+                          <p className="text-rose-600 font-bold text-sm">
+                            {formatLocalTime(meeting.start_time)}
+                          </p>
+                          <p className="text-zinc-400 text-xs">
+                            {getRelativeTime(meeting.start_time)}
+                          </p>
+                        </div>
+
+                        <button
+                          onClick={() => handleJoinMeeting(meeting)}
+                          disabled={!isStarted}
+                          className={`rounded-lg px-6 py-2.5 font-semibold text-white transition active:scale-95 ${isStarted
+                              ? "bg-black hover:bg-zinc-800"
+                              : "bg-zinc-300 cursor-not-allowed"
+                            }`}
+                        >
+                          {isStarted ? "Join Session" : "Starts Soon"}
+                        </button>
+                      </div>
+                    )
+                  })}
                 </div>
               )}
             </div>

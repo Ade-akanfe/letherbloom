@@ -45,11 +45,15 @@ export async function POST(req: Request) {
     }
 
     const meetings = (allMeetings || []).filter((m: any) => {
-      // If allowed_plans is empty or not set, it's accessible to everyone with a code
-      if (!m.allowed_plans || m.allowed_plans.length === 0) return true;
+      // Map legacy "Organization" plan to "Corporate Group" to match the available plans
+      const effectivePlan = userPlan === "Organization" ? "Corporate Group" : userPlan;
 
-      // Otherwise, user must have a matching plan
-      return m.allowed_plans.includes(userPlan);
+      // They can only see the meeting if their specific plan is included in the allowed plans
+      if (!m.allowed_plans || !Array.isArray(m.allowed_plans) || m.allowed_plans.length === 0) {
+        return false;
+      }
+
+      return m.allowed_plans.includes(effectivePlan);
     });
 
     return NextResponse.json({ meetings });
