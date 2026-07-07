@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "LetHerBloom | Women's Upper Body Calisthenics & Strength",
-    description: "Empower your fitness journey with virtual gymnastics, calisthenics, and posture training designed specifically for women.",
+    description: "Empower your fitness journey with virtual gymnastics and Build confidence, strength, and community with workouts designed specifically for women.",
     url: "https://www.lhbloom.org",
     siteName: "LetHerBloom",
     images: [
       {
-        url: "/images/Gemini_Generated_Image_251cny251cny251c.png",
+        url: "/images/replace.jpeg",
         width: 1200,
         height: 630,
         alt: "LetHerBloom Women's Strength Training",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LetHerBloom | Women's Upper Body Calisthenics & Strength",
     description: "Transform your upper body strength and posture with specialized virtual training classes for women.",
-    images: ["/images/Gemini_Generated_Image_251cny251cny251c.png"],
+    images: ["/images/replace.jpeg"],
   },
 };
 
@@ -51,7 +51,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
     "name": "LetHerBloom",
-    "image": "https://www.lhbloom.org/images/Gemini_Generated_Image_251cny251cny251c.png",
+    "image": "https://www.lhbloom.org/images/replace.jpeg",
     "@id": "https://www.lhbloom.org/#organization",
     "url": "https://www.lhbloom.org",
     "description": "Empowering women through focused upper-body strength, mobility, and confidence-building workouts.",

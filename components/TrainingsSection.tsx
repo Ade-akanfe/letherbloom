@@ -87,7 +87,7 @@ export default function TrainingsSection({
           </div>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3 min-w-2xl min-h-40">
+        <div className="grid gap-8 md:grid-cols-3">
           {trainings.map((training, index) => (
             <motion.div
               key={training.title}
